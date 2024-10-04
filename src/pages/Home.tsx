@@ -1,4 +1,5 @@
 import { useAuth } from "../context/AuthContext"
+import Chat from "./Chat";
 
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
             home
             <div>
                 <button onClick={logout}>logout</button>
+                <Chat/>
             </div>
         </div>
     )
