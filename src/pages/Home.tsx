@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"
-import Chat from "./Chat";
 
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
             home
             <div>
                 <button onClick={logout}>logout</button>
-                <Chat/>
+                <Link to={'/chat'}>chat</Link>
             </div>
         </div>
     )

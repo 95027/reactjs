@@ -1,42 +1,35 @@
 import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import useSocket from '../hooks/useSocket';
+
 
 const Chat = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<any[]>([]);
-  const [socket, setSocket] = useState<Socket | null>(null);
+
+  const socket = useSocket();
 
   useEffect(() => {
-  
-    const socketInstance = io('http://localhost:3000', {
-      auth: {
-        token: localStorage.getItem('token'),
-      },
-    });
 
-    setSocket(socketInstance);
+    if (!socket) return;
 
-    socketInstance.on('connect', () => {
-      console.log('Socket connected');
-    });
+    socket.on('chat message', (msg: any) => {
 
-    socketInstance.on('chat message', (msg) => {
-      setMessages((prev) => [...prev, msg]);
-    });
+      setMessages((prev) => [...prev, msg])
 
-    socketInstance.on('disconnect', () => {
-      console.log('Disconnected from server');
     });
 
     return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
+      socket.off('chat message')
+    }
+
+  }, [socket]);
+
+
 
   const sendMessage = () => {
     if (input && socket) {
-      socket.emit('chat message', input); 
-      setInput(''); 
+      socket.emit('chat message', input);
+      setInput('');
     }
   };
 
