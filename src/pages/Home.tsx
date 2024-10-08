@@ -13,6 +13,7 @@ const Home = () => {
             <div>
                 <button onClick={logout}>logout</button>
                 <Link to={'/chat'}>chat</Link>
+                <Link to={'/razorpay'}>Razorpay</Link>
             </div>
         </div>
     )
