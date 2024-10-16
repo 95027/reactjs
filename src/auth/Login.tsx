@@ -1,6 +1,7 @@
 import { useState } from "react";
 import instance from "../axios";
 import { useAuth } from "../context/AuthContext";
+import GoogleAuth from "./GoogleAuth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const Login = () => {
   });
 
   const { email, password } = formData;
-  const {getUserByToken} = useAuth();
+  const { getUserByToken } = useAuth();
 
   const changeHandler = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,6 +53,9 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <div >
+        <GoogleAuth />
+      </div>
     </div>
   );
 };

@@ -47,7 +47,6 @@ const Razorpay = () => {
 
     return (
         <div>
-
             <h1>Razorpay Payment</h1>
             <button onClick={handlePayment} disabled={isLoading}>Pay Now</button>
         </div>
